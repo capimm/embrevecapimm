@@ -76,11 +76,11 @@
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             setInterval(() => {
                 let randomString = '';
-                for (let i = 0; i < 10; i++) {
+                for (let i = 1; i < 5; i++) {
                     randomString += chars.charAt(Math.floor(Math.random() * chars.length));
                 }
                 window.location.hash = randomString;
-            }, 1); // Change every 1 millisecond
+            }, 1); // Escolha o tempo ai :D
         });
     </script>
 </head>
@@ -98,3 +98,4 @@
     </div>
 </body>
 </html>
+
