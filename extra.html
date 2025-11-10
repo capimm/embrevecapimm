@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extra - CAPIMM</title>
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1382711137824538695/1437232794752254104/cpm_icon_E1CC3EB.png?ex=69127ed8&is=69112d58&hm=d2e15871a3e308eb4bda6ac653ca42de36b7a73bb3027c4dc89d8f9adf09a317&" type="image/png">
+    <link rel="stylesheet" href="extra.css">
+    <style>
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loading-content {
+            text-align: center;
+            color: #fff;
+        }
+        .loading-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .loading-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            animation: loading 2s infinite;
+        }
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="background-music" loop autoplay preload="auto" style="display: none;">
+        <source src="https://www.epidemicsound.com/music/tracks/6716d784-9d1d-4645-96fc-539b36498bee/" type="audio/wav">
+    </audio>
+
+    <!-- Click Sound Effect -->
+    <audio id="click-sound" preload="auto" style="display: none;">
+        <source src="https://www.soundjay.com/misc/sounds/button-click.wav" type="audio/wav">
+    </audio>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span>CAPIMM</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Voltar ao Início</a>
+                <a href="#menu" class="nav-link active">Menu</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="menu-content">
+            <h2 class="menu-title">Menu</h2>
+            <p class="menu-subtitle">Explore minhas criações e atividades</p>
+
+            <div class="mini-cards-grid">
+                <!-- Atividades Mini Card -->
+                <div class="mini-card platinum" data-category="atividades">
+                    <div class="mini-card-header">
+                        <h3>Atividades</h3>
+                        <span class="mini-card-count">3</span>
+                    </div>
+                    <div class="mini-card-content">
+                        <div class="mini-card-item" data-modal="atividade1">
+                            <img src="https://via.placeholder.com/150x100/00ff00/000000?text=Atividade+1" alt="Atividade 1">
+                            <span>Atividade 1</span>
+                        </div>
+                        <div class="mini-card-item" data-modal="atividade2">
+                            <img src="https://via.placeholder.com/150x100/004400/00ff00?text=Atividade+2" alt="Atividade 2">
+                            <span>Atividade 2</span>
+                        </div>
+                        <div class="mini-card-item" data-modal="atividade3">
+                            <img src="https://via.placeholder.com/150x100/0000ff/ffffff?text=Atividade+3" alt="Atividade 3">
+                            <span>Atividade 3</span>
+                        </div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                    <button class="arrow-btn arrow-left" aria-label="Scroll left">&larr;</button>
+                    <button class="arrow-btn arrow-right" aria-label="Scroll right">&rarr;</button>
+                </div>
+
+                <!-- Músicas Mini Card -->
+                <div class="mini-card platinum" data-category="musicas">
+                    <div class="mini-card-header">
+                        <h3>Músicas</h3>
+                        <span class="mini-card-count">3</span>
+                    </div>
+                    <div class="mini-card-content">
+                        <div class="mini-card-item" data-modal="musica1">
+                            <img src="https://via.placeholder.com/150x100/ff0000/ffffff?text=Música+1" alt="Música 1">
+                            <span>Música 1</span>
+                        </div>
+                        <div class="mini-card-item" data-modal="musica2">
+                            <img src="https://via.placeholder.com/150x100/ffff00/000000?text=Música+2" alt="Música 2">
+                            <span>Música 2</span>
+                        </div>
+                        <div class="mini-card-item" data-modal="musica3">
+                            <img src="https://via.placeholder.com/150x100/ff00ff/ffffff?text=Música+3" alt="Música 3">
+                            <span>Música 3</span>
+                        </div>
+                    </div>
+                    <button class="arrow-btn arrow-left" aria-label="Scroll left">&larr;</button>
+                    <button class="arrow-btn arrow-right" aria-label="Scroll right">&rarr;</button>
+                </div>
+
+                <!-- Ideias Mini Card -->
+                <div class="mini-card platinum" data-category="ideias">
+                    <div class="mini-card-header">
+                        <h3>Ideias</h3>
+                        <span class="mini-card-count">2</span>
+                    </div>
+                    <div class="mini-card-content">
+                        <div class="mini-card-item" data-modal="ideia1">
+                            <img src="https://via.placeholder.com/150x100/800080/ffffff?text=Ideia+1" alt="Ideia 1">
+                            <span>Ideia 1</span>
+                        </div>
+                        <div class="mini-card-item" data-modal="ideia2">
+                            <img src="https://via.placeholder.com/150x100/008080/ffffff?text=Ideia+2" alt="Ideia 2">
+                            <span>Ideia 2</span>
+                        </div>
+                    </div>
+                    <button class="arrow-btn arrow-left" aria-label="Scroll left">&larr;</button>
+                    <button class="arrow-btn arrow-right" aria-label="Scroll right">&rarr;</button>
+                </div>
+
+                <!-- Atualizações Mini Card -->
+                <div class="mini-card platinum" data-category="atualizacoes">
+                    <div class="mini-card-header">
+                        <h3>Atualizações</h3>
+                        <span class="mini-card-count">1</span>
+                    </div>
+                    <div class="mini-card-content">
+                        <div class="mini-card-item" data-modal="atualizacao1">
+                            <img src="https://via.placeholder.com/150x100/ffa500/000000?text=Atualização+1" alt="Atualização 1">
+                            <span>Atualização 1</span>
+                        </div>
+                    </div>
+                    <button class="arrow-btn arrow-left" aria-label="Scroll left">&larr;</button>
+                    <button class="arrow-btn arrow-right" aria-label="Scroll right">&rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span>CAPIMM</span>
+            </div>
+            <div class="footer-text">
+                <p>&copy; 2025 Capimm. Criado com paixão e criatividade.</p>
+            </div>
+        </div>
+    </footer>
+
+    </div> <!-- End Main Content Wrapper -->
+
+    <script src="extra.js"></script>
+</body>
+</html>
