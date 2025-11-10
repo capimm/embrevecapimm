@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Breve - CAPIMM</title>
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1382711137824538695/1437232794752254104/cpm_icon_E1CC3EB.png?ex=69127ed8&is=69112d58&hm=d2e15871a3e308eb4bda6ac653ca42de36b7a73bb3027c4dc89d8f9adf09a317&" type="image/png">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 800px;
+            max-width: 90vw;
+            padding: 2rem;
+            position: relative;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .contact {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 1rem;
+        }
+        .ray {
+            position: relative;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            animation: rayMove 5s infinite linear;
+        }
+        @keyframes rayMove {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #000000;
+        }
+        /* Chat widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 350px;
+            height: 500px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff00;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .chat-header {
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 1px solid #00ff00;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.bot {
+            justify-content: flex-start;
+        }
+        .message-content {
+            max-width: 70%;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            word-wrap: break-word;
+        }
+        .message.user .message-content {
+            background: #00ff00;
+            color: #000;
+            border-radius: 15px 15px 5px 15px;
+        }
+        .message.bot .message-content {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 15px 15px 15px 5px;
+        }
+        .timestamp {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #00ff00;
+        }
+        .chat-input input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ff00;
+            color: #fff;
+            outline: none;
+            padding: 8px;
+            border-radius: 20px;
+        }
+        .chat-input button {
+            background: #00ff00;
+            border: none;
+            color: #000;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            margin-left: 5px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create chat widget
+            const chatWidget = document.createElement('div');
+            chatWidget.className = 'chat-widget';
+            chatWidget.innerHTML = `
+                <div class="chat-header">Chat ao Vivo</div>
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+                    <button id="send-btn">Enviar</button>
+                </div>
+            `;
+            document.body.appendChild(chatWidget);
+
+            const messagesDiv = document.getElementById('chat-messages');
+            const input = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+
+            function addMessage(text, isUser = false, timestamp = null) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+                const time = timestamp ? new Date(timestamp).toLocaleTimeString() : new Date().toLocaleTimeString();
+                messageDiv.innerHTML = `
+                    <div class="message-content">${text}</div>
+                    <div class="timestamp">${time}</div>
+                `;
+                messagesDiv.appendChild(messageDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+
+            // Load messages from database
+            async function loadMessages() {
+                try {
+                    const response = await fetch('http://localhost:3000/api/messages');
+                    const messages = await response.json();
+                    messages.forEach(msg => {
+                        addMessage(msg.text, msg.is_user, msg.timestamp);
+                    });
+                    if (messages.length === 0) {
+                        addMessage('Bem-vindo ao chat! Como posso ajudar?');
+                    }
+                } catch (error) {
+                    console.error('Error loading messages:', error);
+                    addMessage('Erro ao carregar mensagens. Verifique se o servidor está rodando.');
+                }
+            }
+
+            loadMessages();
+
+            async function sendMessage(text, isUser) {
+                try {
+                    const response = await fetch('http://localhost:3000/api/messages', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ text, is_user: isUser }),
+                    });
+                    return await response.json();
+                } catch (error) {
+                    console.error('Error sending message:', error);
+                    throw error;
+                }
+            }
+
+            sendBtn.addEventListener('click', async function() {
+                const text = input.value.trim();
+                if (text) {
+                    addMessage(text, true);
+                    input.value = '';
+                    try {
+                        await sendMessage(text, true);
+                        // Simulate response
+                        setTimeout(async () => {
+                            const responseText = 'CAPIMM: Obrigado pela mensagem! Entraremos em contato em breve.';
+                            addMessage(responseText, false);
+                            await sendMessage(responseText, false);
+                        }, 1000);
+                    } catch (error) {
+                        addMessage('Erro ao enviar mensagem.', false);
+                    }
+                }
+            });
+
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendBtn.click();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Em Breve</h1>
+        <p>Esta página não foi encontrada ou está sendo desenvolvida. Volte em breve para novidades!</p>
+        <div class="copyright">
+            &copy; 2025 Capimm. Criado com paixão e criatividade.
+        </div>
+        <div class="ray"></div>
+        <div class="contact">
+            Contato: abnerabfk@gmail.com
+        </div>
+    </div>
+</body>
+</html>
