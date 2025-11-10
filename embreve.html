@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Breve - CAPIMM</title>
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1382711137824538695/1437232794752254104/cpm_icon_E1CC3EB.png?ex=69127ed8&is=69112d58&hm=d2e15871a3e308eb4bda6ac653ca42de36b7a73bb3027c4dc89d8f9adf09a317&" type="image/png">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 800px;
+            max-width: 90vw;
+            padding: 2rem;
+            position: relative;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .contact {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 1rem;
+        }
+        .ray {
+            position: relative;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            animation: rayMove 5s infinite linear;
+        }
+        @keyframes rayMove {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #000000;
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Change URL hash periodically with random alphanumeric characters
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            setInterval(() => {
+                let randomString = '';
+                for (let i = 0; i < 10; i++) {
+                    randomString += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                window.location.hash = randomString;
+            }, 1); // Change every 1 millisecond
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Em Breve</h1>
+        <p>Esta página não foi encontrada ou está sendo desenvolvida. Volte em breve para novidades!</p>
+        <div class="copyright">
+            &copy; 2025 Capimm. Criado com paixão e criatividade.
+        </div>
+        <div class="ray"></div>
+        <div class="contact">
+            Contato: abnerabfk@gmail.com
+        </div>
+    </div>
+</body>
+</html>
